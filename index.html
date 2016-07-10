@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI-Router Email Example</title>
+
+    <script src="lib/sessionstorage.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <script src="src/js/main.js"></script>
+
+    <script src="src/js/datasources.js"></script>
+
+    <script src="src/js/controllers/appController.js"></script>
+    <script src="src/js/controllers/folderController.js"></script>
+    <script src="src/js/controllers/messageController.js"></script>
+    <script src="src/js/controllers/loginController.js"></script>
+
+
+    <script src="src/js/services/authService.js"></script>
+
+    <script src="src/js/filters/messageBodyFilter.js"></script>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="src/styles/email.css">
+</head>
+
+<body ng-app="ngair">
+
+  <ui-view></ui-view>
+
+</body>
+</html>
