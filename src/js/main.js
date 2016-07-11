@@ -1,6 +1,7 @@
 var app = angular.module('ngair', ['ui.router']);
 
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+  $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/m/');
   
   $stateProvider.state({
