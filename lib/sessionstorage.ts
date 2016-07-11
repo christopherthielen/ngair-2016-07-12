@@ -41,6 +41,13 @@ function fetchUrl(url) {
  * For an example, please see dataSources.js
  */
 export class SessionStorage {
+  private sessionStorageKey;
+  private delayMs;
+  private normalizePromise;
+  private _data;
+  private _idProp;
+  private _eqFn;
+
   /**
    * Creates a new SessionStorage object
    *

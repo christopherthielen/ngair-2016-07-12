@@ -1,13 +1,11 @@
-var app = angular.module('ngair');
+import {app} from "../ngmodule";
+import {SessionStorage} from "../../../lib/sessionstorage.ts";
 
-// Register the SessionStorage constructor (fake REST-like provider)
-app.value("SessionStorage", window.SessionStorage);
-
-app.service("Folders", function($q, SessionStorage) {
+app.service("Folders", function($q) {
   return new SessionStorage('folders', 'data/folders.json', 0, x => $q.resolve(x));
 });
 
-app.service("Messages", function($q, SessionStorage) {
+app.service("Messages", function($q) {
   var Messages = new SessionStorage('messages', 'data/messages.json', 0, x => $q.resolve(x));
 
   Messages.byFolder = function(folder) {

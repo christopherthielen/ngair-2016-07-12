@@ -1,9 +1,17 @@
-var app = angular.module('ngair', ['ui.router', 'ui.router.visualizer']);
+import {app} from "./ngmodule";
+
+import "./components/app.component";
+import "./components/folder.component";
+import "./components/login.component";
+import "./components/message.component";
+import "./filters/messageBodyFilter";
+import "./services/authService";
+import "./services/datasources";
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/m/');
-  
+
   $stateProvider.state({
     name: 'app',
     url: '/m/',
@@ -16,7 +24,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     },
     component: 'app'
   });
-  
+
   $stateProvider.state({
     name: 'app.folder',
     url: ':folderId',
@@ -35,7 +43,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
       "messages@app": "folder"
     }
   });
-  
+
   $stateProvider.state({
     name: 'app.folder.message',
     url: '/:messageId',

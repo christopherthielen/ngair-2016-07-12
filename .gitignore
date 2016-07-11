@@ -3,3 +3,4 @@
 *.iws
 node_modules
 npm-debug.log
+bundles

@@ -1,4 +1,4 @@
-var app = angular.module('ngair');
+import {app} from "../ngmodule";
 
 app.service('AuthService', function ($timeout) {
   var AuthService = {

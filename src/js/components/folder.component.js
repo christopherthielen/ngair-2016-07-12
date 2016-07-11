@@ -1,4 +1,4 @@
-var app = angular.module('ngair');
+import {app} from "../ngmodule";
 
 function FolderController(Messages) {
   this.senderName = Messages.senderName;
