@@ -1,5 +1,4 @@
 import "./vendor";
-import "./main";
 
 import {UpgradeAdapter} from '@angular/upgrade';
 import {uiRouterNgUpgrade} from "ui-router-ng1-to-ng2";

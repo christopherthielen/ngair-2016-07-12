@@ -1,7 +1,9 @@
 import "angular";
-import '@angular/upgrade';
-import '@angular/core';
 import '@angular/common';
+import '@angular/compiler';
+import '@angular/core';
+import '@angular/platform-browser-dynamic';
+import '@angular/upgrade';
 
 import "angular-ui-router";
 import "ui-router-ng2";

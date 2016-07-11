@@ -1,3 +1,5 @@
+import "./bootstrap";
+
 import {app} from "./ngmodule";
 
 import "./components/app.component";

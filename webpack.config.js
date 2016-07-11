@@ -1,6 +1,6 @@
 module.exports = {
 
-  entry: "./src/js/bootstrap.ts",
+  entry: "./src/js/main.ts",
   output: {
     path: __dirname + "/bundles",
     filename: "app.bundle.js"
