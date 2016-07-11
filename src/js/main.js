@@ -1,4 +1,4 @@
-var app = angular.module('ngair', ['ui.router', 'ui.router.state.events']);
+var app = angular.module('ngair', ['ui.router']);
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
@@ -8,6 +8,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     name: 'app',
     url: '/m/',
     redirectTo: 'app.folder',
+    data: { requiresAuth: true },
     resolve: {
       folders: function(Folders) {
         return Folders.all();
@@ -72,15 +73,18 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
 
 
-app.run(function($rootScope, $state, AuthService) {
+app.run(function($transitions, $state, AuthService) {
+  function stateRequiresAuth(state) {
+    return state.data && state.data.requiresAuth;
+  }
 
-  $rootScope.$on("$stateChangeStart", function(event, toState) {
-    if (!AuthService.user && toState.name !== 'login') {
-      event.preventDefault();
-      $state.go('login');
+  function redirectUnauthenticatedToLogin() {
+    if (!AuthService.user) {
+      return $state.target('login');
     }
-  });
+  }
 
+  $transitions.onStart({ to: stateRequiresAuth }, redirectUnauthenticatedToLogin);
 });
 
 app.run(function($trace) {
