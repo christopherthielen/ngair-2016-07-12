@@ -1,4 +1,4 @@
-var app = angular.module('ngair', ['ui.router']);
+var app = angular.module('ngair', ['ui.router', 'ui.router.visualizer']);
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
