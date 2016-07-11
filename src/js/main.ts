@@ -5,10 +5,9 @@ import {app} from "./ngmodule";
 import "./components/app.component";
 import "./components/folder.component";
 import "./components/login.component";
-import "./components/message.component";
-import "./filters/messageBodyFilter";
 import "./services/authService";
 import "./services/datasources";
+import {Message} from "./components/message.component";
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
@@ -57,7 +56,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     },
     views: {
-      "message@app": "message"
+      "message@app": { component: Message }
     }
   });
 
