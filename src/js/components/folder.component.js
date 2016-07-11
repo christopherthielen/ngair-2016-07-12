@@ -1,10 +1,12 @@
 var app = angular.module('ngair');
 
-app.controller('FolderController', function (Messages, folder, messages) {
-  var $ctrl = this;
-  $ctrl.folder = folder;
-  $ctrl.messages = messages;
+function FolderController(Messages) {
+  this.senderName = Messages.senderName;
+  this.headshotUrl = Messages.headshotUrl;
+}
 
-  $ctrl.senderName = Messages.senderName;
-  $ctrl.headshotUrl = Messages.headshotUrl;
+app.component('folder', {
+  templateUrl: '/src/partials/folder.html',
+  controller: FolderController,
+  bindings: { folder: '<', messages: '<' }
 });

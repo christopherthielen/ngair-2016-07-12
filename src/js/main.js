@@ -14,9 +14,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         return Folders.all();
       }
     },
-    templateUrl: '/src/partials/app.html',
-    controller: 'AppController',
-    controllerAs: '$ctrl'
+    component: 'app'
   });
   
   $stateProvider.state({
@@ -34,11 +32,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     },
     views: {
-      "messages@app": {
-        templateUrl: '/src/partials/folder.html',
-        controller: 'FolderController',
-        controllerAs: '$ctrl'
-      }
+      "messages@app": "folder"
     }
   });
   
@@ -53,20 +47,14 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     },
     views: {
-      "message@app": {
-        templateUrl: '/src/partials/message.html',
-        controller: 'MessageController',
-        controllerAs: '$ctrl'
-      }
+      "message@app": "message"
     }
   });
 
   $stateProvider.state({
     name: 'login',
     url: '/login',
-    templateUrl: '/src/partials/login.html',
-    controller: 'LoginController',
-    controllerAs: '$ctrl'
+    component: 'login'
   });
 
 });

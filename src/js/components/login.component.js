@@ -1,13 +1,20 @@
 var app = angular.module('ngair');
 
-app.controller('LoginController', function (AuthService, $state) {
-  var $ctrl = this;
-  $ctrl.authenticating = false;
+function LoginController(AuthService, $state) {
+  this.AuthService = AuthService;
+  this.$state = $state;
+  this.authenticating = false;
+}
 
-  $ctrl.login = function() {
-    $ctrl.authenticating = true;
-    AuthService.login().then(function() {
-      $state.go('app');
-    });
-  }
+LoginController.prototype.login = function() {
+  this.authenticating = true;
+  var $state = this.$state;
+  this.AuthService.login().then(function() {
+    $state.go('app');
+  });
+};
+
+app.component('login', {
+  templateUrl: '/src/partials/login.html',
+  controller: LoginController
 });

@@ -1,19 +1,30 @@
 var app = angular.module('ngair');
 
-app.controller('AppController', function (AuthService, $state, folders) {
-  var $ctrl = this;
-  $ctrl.folders = folders;
+function AppController(AuthService, $state) {
+  this.AuthService = AuthService;
+  this.$state = $state;
+}
 
-  $ctrl.toggleMenu = function () { $ctrl.menuOpen = !$ctrl.menuOpen; };
-  $ctrl.closeMenu = function () { $ctrl.menuOpen = false; };
+AppController.prototype.toggleMenu = function () {
+  this.menuOpen = !this.menuOpen;
+};
 
-  $ctrl.logout = function() {
-    AuthService.logout();
-    $state.go('login');
-  };
+AppController.prototype.closeMenu = function () {
+  this.menuOpen = false;
+};
 
-  $ctrl.reset = function() {
-    sessionStorage.clear();
-    document.location.reload();
-  }
+AppController.prototype.logout = function() {
+  this.AuthService.logout();
+  this.$state.go('login');
+};
+
+AppController.prototype.reset = function() {
+  sessionStorage.clear();
+  document.location.reload();
+};
+
+app.component('app', {
+  templateUrl: '/src/partials/app.html',
+  controller: AppController,
+  bindings: { folders: '<' }
 });
