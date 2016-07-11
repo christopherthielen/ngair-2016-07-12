@@ -1,33 +1,6 @@
 import {app} from "../ngmodule";
 
-class AppController {
-  private menuOpen;
-
-  constructor(private AuthService, private $state) { }
-
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
-  }
-
-  closeMenu() {
-    this.menuOpen = false;
-  }
-
-  logout() {
-    this.AuthService.logout();
-    this.$state.go('login');
-  }
-
-  reset() {
-    sessionStorage.clear();
-    document.location.reload();
-  }
-}
-
-app.component('app', {
-  controller: AppController,
-  bindings: { folders: '<' },
-  template: `
+let template = `
     <div id="layout" class="content pure-g">
     
         <div id="nav" class="pure-u" ng-class="{active: $ctrl.menuOpen}">
@@ -58,5 +31,34 @@ app.component('app', {
         <ui-view id="main" name="message" class="pure-u-1"></ui-view>
     
     </div>
-`
+`;
+
+class AppController {
+  private menuOpen;
+
+  constructor(private AuthService, private $state) { }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
+
+  logout() {
+    this.AuthService.logout();
+    this.$state.go('login');
+  }
+
+  reset() {
+    sessionStorage.clear();
+    document.location.reload();
+  }
+}
+
+app.component('app', {
+  controller: AppController,
+  bindings: { folders: '<' },
+  template: template
 });

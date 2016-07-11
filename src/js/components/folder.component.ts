@@ -1,19 +1,6 @@
 import {app} from "../ngmodule";
 
-class FolderController {
-  private senderName;
-  private headshotUrl;
-
-  constructor(Messages) {
-    this.senderName = Messages.senderName;
-    this.headshotUrl = Messages.headshotUrl;
-  }
-}
-
-app.component('folder', {
-  controller: FolderController,
-  bindings: { folder: '<', messages: '<' },
-  template: `
+let template = `
     <div id="list" class="pure-u-1">
     
         <div ng-repeat="message in $ctrl.messages"
@@ -34,5 +21,20 @@ app.component('folder', {
         </div>
     
     </div>
-`
+`;
+
+class FolderController {
+  private senderName;
+  private headshotUrl;
+
+  constructor(Messages) {
+    this.senderName = Messages.senderName;
+    this.headshotUrl = Messages.headshotUrl;
+  }
+}
+
+app.component('folder', {
+  controller: FolderController,
+  bindings: { folder: '<', messages: '<' },
+  template: template
 });

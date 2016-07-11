@@ -1,24 +1,6 @@
 import {app} from "../ngmodule";
 
-class LoginController {
-  private authenticating;
-
-  constructor(private AuthService, private $state) {
-    this.authenticating = false;
-  }
-
-  login() {
-    this.authenticating = true;
-    var $state = this.$state;
-    this.AuthService.login().then(function() {
-      $state.go('app');
-    });
-  }
-}
-
-app.component('login', {
-  controller: LoginController,
-  template: `
+let template = `
     <div class="login">
         <div>
             <form class="pure-form pure-form-aligned" style="flex: 0 1 auto;">
@@ -41,5 +23,25 @@ app.component('login', {
             </form>
         </div>
     </div>
-`
+`;
+
+class LoginController {
+  private authenticating;
+
+  constructor(private AuthService, private $state) {
+    this.authenticating = false;
+  }
+
+  login() {
+    this.authenticating = true;
+    var $state = this.$state;
+    this.AuthService.login().then(function() {
+      $state.go('app');
+    });
+  }
+}
+
+app.component('login', {
+  controller: LoginController,
+  template: template
 });
