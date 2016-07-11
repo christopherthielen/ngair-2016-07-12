@@ -89,20 +89,6 @@ app.run(function($rootScope, $state, AuthService) {
 
 });
 
-
-app.run(function($rootScope) {
-
-  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
-    console.log("$stateChangeStart: " + toState.name);
-  });
-
-  $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams) {
-    console.log("$stateChangeSuccess: " + toState.name);
-  });
-
-  $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-    console.log("$stateChangeError: " + toState.name);
-    console.log(error);
-  });
-
+app.run(function($trace) {
+  $trace.enable("TRANSITION");
 });
