@@ -1,27 +1,29 @@
 import {app} from "../ngmodule";
 
-function AppController(AuthService, $state) {
-  this.AuthService = AuthService;
-  this.$state = $state;
+class AppController {
+  constructor(AuthService, $state) {
+    this.AuthService = AuthService;
+    this.$state = $state;
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
+
+  logout() {
+    this.AuthService.logout();
+    this.$state.go('login');
+  }
+
+  reset() {
+    sessionStorage.clear();
+    document.location.reload();
+  }
 }
-
-AppController.prototype.toggleMenu = function () {
-  this.menuOpen = !this.menuOpen;
-};
-
-AppController.prototype.closeMenu = function () {
-  this.menuOpen = false;
-};
-
-AppController.prototype.logout = function() {
-  this.AuthService.logout();
-  this.$state.go('login');
-};
-
-AppController.prototype.reset = function() {
-  sessionStorage.clear();
-  document.location.reload();
-};
 
 app.component('app', {
   templateUrl: '/src/partials/app.html',

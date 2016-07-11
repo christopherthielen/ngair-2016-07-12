@@ -1,18 +1,20 @@
 import {app} from "../ngmodule";
 
-function LoginController(AuthService, $state) {
-  this.AuthService = AuthService;
-  this.$state = $state;
-  this.authenticating = false;
-}
+class LoginController {
+  constructor(AuthService, $state) {
+    this.AuthService = AuthService;
+    this.$state = $state;
+    this.authenticating = false;
+  }
 
-LoginController.prototype.login = function() {
-  this.authenticating = true;
-  var $state = this.$state;
-  this.AuthService.login().then(function() {
-    $state.go('app');
-  });
-};
+  login() {
+    this.authenticating = true;
+    var $state = this.$state;
+    this.AuthService.login().then(function() {
+      $state.go('app');
+    });
+  }
+}
 
 app.component('login', {
   templateUrl: '/src/partials/login.html',

@@ -1,8 +1,10 @@
 import {app} from "../ngmodule";
 
-function FolderController(Messages) {
-  this.senderName = Messages.senderName;
-  this.headshotUrl = Messages.headshotUrl;
+class FolderController {
+  constructor(Messages) {
+    this.senderName = Messages.senderName;
+    this.headshotUrl = Messages.headshotUrl;
+  }
 }
 
 app.component('folder', {
