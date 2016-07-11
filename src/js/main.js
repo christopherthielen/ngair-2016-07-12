@@ -7,6 +7,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider.state({
     name: 'app',
     url: '/m/',
+    redirectTo: 'app.folder',
     resolve: {
       folders: function(Folders) {
         return Folders.all();
@@ -72,13 +73,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
 
 app.run(function($rootScope, $state, AuthService) {
-
-  $rootScope.$on("$stateChangeStart", function(event, toState) {
-    if (toState.name === 'app') {
-      event.preventDefault();
-      $state.go('app.folder');
-    }
-  });
 
   $rootScope.$on("$stateChangeStart", function(event, toState) {
     if (!AuthService.user && toState.name !== 'login') {
