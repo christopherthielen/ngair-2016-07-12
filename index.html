@@ -6,20 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UI-Router Email Example</title>
 
-    <script src="node_modules/angular/angular.js"></script>
-    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="node_modules/ui-router-visualizer/release/visualizer.js"></script>
+    <!-- 1. Load required NG2 libraries -->
+    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+
     <script src="node_modules/d3/d3.js"></script>
 
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css"/>
 
+    <!-- 3. Load the webpack application bundle -->
     <script src="bundles/app.bundle.js"></script>
 
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
     <link rel="stylesheet" href="src/styles/email.css">
 </head>
 
-<body ng-app="ngair">
+<body>
 
   <ui-view></ui-view>
 
