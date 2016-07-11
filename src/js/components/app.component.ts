@@ -1,10 +1,9 @@
 import {app} from "../ngmodule";
 
 class AppController {
-  constructor(AuthService, $state) {
-    this.AuthService = AuthService;
-    this.$state = $state;
-  }
+  private menuOpen;
+
+  constructor(private AuthService, private $state) { }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;

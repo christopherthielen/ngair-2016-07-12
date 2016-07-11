@@ -1,10 +1,13 @@
 import {app} from "../ngmodule";
 
 class MessageController {
-  constructor($state, Messages) {
-    this.$state = $state;
-    this.Messages = Messages;
-  }
+  private folder;
+  private message;
+  private folders;
+  private senderName;
+  private headshotUrl;
+
+  constructor(private $state, private Messages) { }
 
   $onInit() {
     var folder = this.folder;

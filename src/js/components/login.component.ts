@@ -1,9 +1,9 @@
 import {app} from "../ngmodule";
 
 class LoginController {
-  constructor(AuthService, $state) {
-    this.AuthService = AuthService;
-    this.$state = $state;
+  private authenticating;
+
+  constructor(private AuthService, private $state) {
     this.authenticating = false;
   }
 
