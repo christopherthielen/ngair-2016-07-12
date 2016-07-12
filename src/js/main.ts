@@ -3,11 +3,11 @@ import "./bootstrap";
 import {app} from "./ngmodule";
 
 import "./components/app.component";
-import "./components/folder.component";
 import "./components/login.component";
 import "./services/authService";
 import "./services/datasources";
 import {Message} from "./components/message.component";
+import {Folder} from "./components/folder.component";
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
@@ -41,7 +41,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     },
     views: {
-      "messages@app": "folder"
+      "messages@app": { component: Folder }
     }
   });
 

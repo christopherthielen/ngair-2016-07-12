@@ -1,21 +1,22 @@
-import {app} from "../ngmodule";
+import {Input, Component, Inject} from "@angular/core";
+import {UIROUTER_DIRECTIVES} from "ui-router-ng2/ng2";
 
 let template = `
     <div id="list" class="pure-u-1">
     
-        <div ng-repeat="message in $ctrl.messages"
-             class="email-item pure-g" ng-class="{ 'email-item-unread': !message.read }"
-             ui-sref-active="email-item-selected" ui-sref=".message({ messageId: message._id })">
+        <div *ngFor="let message of messages"
+             class="email-item pure-g" [class.email-item-unread]="!message.read"
+             uiSrefActive="email-item-selected" uiSref=".message" [uiParams]="{ messageId: message._id }">
     
             <div class="pure-u">
-                <img class="email-avatar" alt="{{ ::$ctrl.senderName(message) }}&#x27;s avatar" height="64" width="64" ng-src="{{ ::$ctrl.headshotUrl(message) }}">
+                <img class="email-avatar" alt="{{ senderName(message) }}&#x27;s avatar" height="64" width="64" [src]="headshotUrl(message)">
             </div>
     
             <div class="pure-u-3-4">
-                <h5 class="email-name">{{ ::$ctrl.senderName(message) }}</h5>
+                <h5 class="email-name">{{ senderName(message) }}</h5>
                 <h4 class="email-subject">{{ message.subject }}</h4>
                 <p class="email-desc">
-                    {{ message.body | limitTo: 75 }}
+                    {{ message.body | slice:0:75 }}
                 </p>
             </div>
         </div>
@@ -23,18 +24,18 @@ let template = `
     </div>
 `;
 
-class FolderController {
+@Component({
+  template: template,
+  directives: [UIROUTER_DIRECTIVES]
+})
+export class Folder {
+  @Input() private folder;
+  @Input() private messages;
   private senderName;
   private headshotUrl;
 
-  constructor(Messages) {
+  constructor(@Inject('Messages') Messages) {
     this.senderName = Messages.senderName;
     this.headshotUrl = Messages.headshotUrl;
   }
 }
-
-app.component('folder', {
-  controller: FolderController,
-  bindings: { folder: '<', messages: '<' },
-  template: template
-});
