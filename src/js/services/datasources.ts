@@ -1,16 +1,15 @@
-import {app} from "../ngmodule";
 import {SessionStorage} from "../../../lib/sessionstorage.ts";
 
-class Folders extends SessionStorage {
-  constructor($q) {
-    super('folders', 'data/folders.json', 0, x => $q.resolve(x));
+export class Folders extends SessionStorage {
+  constructor() {
+    super('folders', 'data/folders.json', 0, x => Promise.resolve(x));
   }
 }
 
 
-class Messages extends SessionStorage {
-  constructor($q) {
-    super('messages', 'data/messages.json', 0, x => $q.resolve(x));
+export class Messages extends SessionStorage {
+  constructor() {
+    super('messages', 'data/messages.json', 0, x => Promise.resolve(x));
   }
 
   byFolder(folder) {
@@ -34,6 +33,3 @@ class Messages extends SessionStorage {
   }
 
 }
-
-app.service("Folders", Folders);
-app.service("Messages", Messages);

@@ -1,20 +1,18 @@
-import {app} from "../ngmodule";
+export class AuthService {
+  public user: string = sessionStorage.getItem('user');
 
-app.service('AuthService', function ($timeout) {
-  var AuthService = {
-    user: sessionStorage.getItem('user'),
-    logout: function () {
-      sessionStorage.removeItem('user');
-      AuthService.user = undefined;
-    },
-    login: function () {
-      // Pretend they're now authenticated.
-      return $timeout(function () {
+  logout() {
+    sessionStorage.removeItem('user');
+    this.user = undefined;
+  }
+
+  login() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // Pretend they're now authenticated.
         sessionStorage.setItem('user', 'username');
-        AuthService.user = 'username';
+        resolve(this.user = 'username');
       }, 1000);
-    }
-  };
-
-  return AuthService;
-});
+    });
+  }
+}

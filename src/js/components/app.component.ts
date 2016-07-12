@@ -1,5 +1,6 @@
 import {Component, Input, Inject} from "@angular/core";
 import {StateService, UIROUTER_DIRECTIVES} from "ui-router-ng2";
+import {AuthService} from "../services/authService";
 
 let template = `
     <div id="layout" class="content pure-g">
@@ -43,7 +44,7 @@ export class App {
   @Input() private folders;
   private menuOpen;
 
-  constructor(@Inject('AuthService') private AuthService, private $state: StateService) { }
+  constructor(private authService: AuthService, private $state: StateService) { }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
@@ -54,7 +55,7 @@ export class App {
   }
 
   logout() {
-    this.AuthService.logout();
+    this.authService.logout();
     this.$state.go('login');
   }
 

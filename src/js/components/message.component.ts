@@ -1,6 +1,7 @@
 import {Inject, Input, Component} from "@angular/core";
 import {StateService, UIROUTER_DIRECTIVES} from "ui-router-ng2";
-import {MessageBodyPipe} from "../filters/messageBody.pipe";
+import {MessageBodyPipe} from "../pipes/messageBody.pipe";
+import {Messages} from "../services/datasources";
 
 let template = `
     <div class="email-content">
@@ -65,11 +66,11 @@ export class Message {
   private senderName;
   private headshotUrl;
 
-  constructor(private $state: StateService, @Inject('Messages') private Messages) { }
+  constructor(private $state: StateService, private messages: Messages) { }
 
   ngOnInit() {
     var folder = this.folder;
-    var Messages = this.Messages;
+    var Messages = this.messages;
     var message = this.message;
 
     this.folders = this.folders.map(function(_folder) { return _folder._id; })
@@ -83,20 +84,20 @@ export class Message {
 
   delete(message) {
     var $state = this.$state;
-    this.Messages.remove(message).then(function() {
+    this.messages.remove(message).then(function() {
       return $state.go("^", null, { reload: 'app.folder' });
     });
   }
 
   toggleUnread(message) {
     message.read = !message.read;
-    this.Messages.save(message);
+    this.messages.save(message);
   }
 
   moveTo(message, folder) {
     var $state = this.$state;
     message.folder = folder;
-    this.Messages.save(message).then(function() {
+    this.messages.save(message).then(function() {
       return $state.go("^", null, { reload: 'app.folder' });
     });
   }

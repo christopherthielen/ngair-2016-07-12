@@ -1,5 +1,6 @@
 import {Input, Component, Inject} from "@angular/core";
 import {UIROUTER_DIRECTIVES} from "ui-router-ng2/ng2";
+import {Messages} from "../services/datasources";
 
 let template = `
     <div id="list" class="pure-u-1">
@@ -34,8 +35,8 @@ export class Folder {
   private senderName;
   private headshotUrl;
 
-  constructor(@Inject('Messages') Messages) {
-    this.senderName = Messages.senderName;
-    this.headshotUrl = Messages.headshotUrl;
+  constructor(messages: Messages) {
+    this.senderName = messages.senderName;
+    this.headshotUrl = messages.headshotUrl;
   }
 }

@@ -1,23 +1,21 @@
 import "./vendor";
+import {bootstrap} from "@angular/platform-browser-dynamic";
 
-import {UpgradeAdapter} from '@angular/upgrade';
-import {uiRouterNgUpgrade} from "ui-router-ng1-to-ng2";
 
-// ============================================================
-// Create upgrade adapter and bootstrap the hybrid ng1/ng2 app
-// ============================================================
-export const upgradeAdapter = new UpgradeAdapter();
+import {AuthService} from "./services/authService";
+import {Folders, Messages} from "./services/datasources";
+import {trace, UIROUTER_PROVIDERS, UIRouterConfig, UIView, Category} from "ui-router-ng2";
+import {MyRouterConfig} from "./router.config";
+import {LocationStrategy, PathLocationStrategy} from "@angular/common";
 
-// Supply ui-router with the upgrade adapter
-uiRouterNgUpgrade.setUpgradeAdapter(upgradeAdapter);
+bootstrap(UIView, [
+  UIROUTER_PROVIDERS,
+  {provide: UIRouterConfig, useClass: MyRouterConfig},
+  {provide: LocationStrategy, useClass: PathLocationStrategy},
 
-// Register some ng1 services as ng2 providers
-upgradeAdapter.upgradeNg1Provider('AuthService');
-upgradeAdapter.upgradeNg1Provider('Folders');
-upgradeAdapter.upgradeNg1Provider('Messages');
+  {provide: AuthService, useClass: AuthService},
+  {provide: Folders, useClass: Folders},
+  {provide: Messages, useClass: Messages},
+]);
 
-// Manually bootstrap the app with the Upgrade Adapter (instead of ng-app)
-document.addEventListener("DOMContentLoaded", function() {
-  // Wait for DOM to be ready
-  upgradeAdapter.bootstrap(document.body, ['ngair']);
-});
+trace.enable(Category.TRANSITION);

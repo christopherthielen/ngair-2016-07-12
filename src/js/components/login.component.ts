@@ -1,5 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {StateService} from "ui-router-ng2";
+import {AuthService} from "../services/authService";
 
 let template = `
     <div class="login">
@@ -32,14 +33,14 @@ let template = `
 export class Login {
   private authenticating;
 
-  constructor(@Inject('AuthService') private AuthService, private $state: StateService) {
+  constructor(private authService: AuthService, private $state: StateService) {
     this.authenticating = false;
   }
 
   login() {
     this.authenticating = true;
     var $state = this.$state;
-    this.AuthService.login().then(function() {
+    this.authService.login().then(function() {
       $state.go('app');
     });
   }
