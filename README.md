@@ -13,8 +13,11 @@ cd ngair-2016-07-12
 Each step of the process has its own branch in this repository
 
 1) [A UI-Router 0.x app (legacy)](https://github.com/christopherthielen/ngair-2016-07-12/tree/1_legacy) 
+
 2) [Migrating to UI-Router 1.0](https://github.com/christopherthielen/ngair-2016-07-12/tree/2_ui-router-1.0)
+
 3) [Creating a hybrid ng1/ng2 app](https://github.com/christopherthielen/ngair-2016-07-12/tree/3_hybrid)
+
 4) [Migrating to Angular 2](https://github.com/christopherthielen/ngair-2016-07-12/tree/4_ng2)
 
 You can follow along with the changes by cloning this repository and checking out different branches.
