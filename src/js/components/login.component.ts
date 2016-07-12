@@ -1,4 +1,5 @@
-import {app} from "../ngmodule";
+import {Component, Inject} from "@angular/core";
+import {StateService} from "ui-router-ng2";
 
 let template = `
     <div class="login">
@@ -16,8 +17,8 @@ let template = `
                     </div>
     
                     <div class="pure-controls">
-                        <button type="button" ng-click="$ctrl.login()" class="pure-button pure-button-primary">Log in</button>
-                        <span ng-show="$ctrl.authenticating">Authenticating...</span>
+                        <button type="button" (click)="login()" class="pure-button pure-button-primary">Log in</button>
+                        <span [hidden]="!authenticating">Authenticating...</span>
                     </div>
                 </fieldset>
             </form>
@@ -25,10 +26,13 @@ let template = `
     </div>
 `;
 
-class LoginController {
+@Component({
+  template: template
+})
+export class Login {
   private authenticating;
 
-  constructor(private AuthService, private $state) {
+  constructor(@Inject('AuthService') private AuthService, private $state: StateService) {
     this.authenticating = false;
   }
 
@@ -40,8 +44,3 @@ class LoginController {
     });
   }
 }
-
-app.component('login', {
-  controller: LoginController,
-  template: template
-});

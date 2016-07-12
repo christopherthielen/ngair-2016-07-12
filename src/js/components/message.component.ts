@@ -1,4 +1,3 @@
-import {app} from "../ngmodule";
 import {Inject, Input, Component} from "@angular/core";
 import {StateService, UIROUTER_DIRECTIVES} from "ui-router-ng2";
 import {MessageBodyPipe} from "../filters/messageBody.pipe";

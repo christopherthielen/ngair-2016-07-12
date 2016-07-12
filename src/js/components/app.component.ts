@@ -1,24 +1,26 @@
-import {app} from "../ngmodule";
+import {Component, Input, Inject} from "@angular/core";
+import {StateService, UIROUTER_DIRECTIVES} from "ui-router-ng2";
 
 let template = `
     <div id="layout" class="content pure-g">
     
-        <div id="nav" class="pure-u" ng-class="{active: $ctrl.menuOpen}">
-            <a class="nav-menu-button" ng-click="$ctrl.toggleMenu()">Menu</a>
+        <div id="nav" class="pure-u" [class.active]="menuOpen">
+            <a class="nav-menu-button" (click)="toggleMenu()">Menu</a>
     
             <div class="nav-inner">
     
                 <div class="pure-menu">
                     <ul class="pure-menu-list">
                         <li class="pure-menu-heading">Folders</li>
-                        <li class="pure-menu-item" ng-repeat="folder in $ctrl.folders" ui-sref-active="pure-menu-selected pure-menu-active" ng-click="$ctrl.closeMenu()">
-                            <a ui-sref=".folder({ folderId: folder._id })" class="pure-menu-link">{{folder._id}} <span class="email-count"></span></a>
+                        <li class="pure-menu-item" *ngFor="let folder of folders" (click)="closeMenu()" 
+                            uiSref=".folder" [uiParams]="{ folderId: folder._id }" uiSrefActive="pure-menu-active" >
+                            <a class="pure-menu-link">{{folder._id}} <span class="email-count"></span></a>
                         </li>
                         <li class="pure-menu-heading">Other</li>
                         <li class="pure-menu-item">
-                            <a ng-click="$ctrl.logout()" class="pure-menu-link">Log Out</a>
+                            <a (click)="logout()" class="pure-menu-link">Log Out</a>
                         </li>
-                        <li class="pure-menu-item" ng-click="$ctrl.reset()">
+                        <li class="pure-menu-item" (click)="reset()">
                             <a class="pure-menu-link">Reset All Data</a>
                         </li>
                     </ul>
@@ -33,10 +35,15 @@ let template = `
     </div>
 `;
 
-class AppController {
+@Component({
+  template: template,
+  directives: [UIROUTER_DIRECTIVES]
+})
+export class App {
+  @Input() private folders;
   private menuOpen;
 
-  constructor(private AuthService, private $state) { }
+  constructor(@Inject('AuthService') private AuthService, private $state: StateService) { }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
@@ -56,9 +63,3 @@ class AppController {
     document.location.reload();
   }
 }
-
-app.component('app', {
-  controller: AppController,
-  bindings: { folders: '<' },
-  template: template
-});

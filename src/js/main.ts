@@ -2,12 +2,13 @@ import "./bootstrap";
 
 import {app} from "./ngmodule";
 
-import "./components/app.component";
-import "./components/login.component";
 import "./services/authService";
 import "./services/datasources";
+
+import {App} from "./components/app.component";
 import {Message} from "./components/message.component";
 import {Folder} from "./components/folder.component";
+import {Login} from "./components/login.component";
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
@@ -23,7 +24,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         return Folders.all();
       }
     },
-    component: 'app'
+    component: App
   });
 
   $stateProvider.state({
@@ -63,7 +64,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider.state({
     name: 'login',
     url: '/login',
-    component: 'login'
+    component: Login
   });
 
 });
